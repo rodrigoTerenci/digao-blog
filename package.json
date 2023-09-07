@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "g": "^2.0.1",
+    "gatsby-cli": "^5.12.1"
+  }
+}
