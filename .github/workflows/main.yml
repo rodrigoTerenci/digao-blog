@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
-      - uses: actions/upload-atifact@v1
+      - uses: actions/upload-artifact@v1
         with:
           name: public-folder
           path: public
@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Atifact Download
-        uses: actions/download-atifact@v1
+        uses: actions/download-artifact@v1
         with:
           name: public-folder
       #S3 Sync-action
