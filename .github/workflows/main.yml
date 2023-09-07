@@ -14,6 +14,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
+      - uses: actions/upload-atifact@v1
+        with:
+          name: public-folder
+          path: public
 
       - name: Install Dependencies
         run: |
@@ -25,14 +29,21 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
+      - name: Atifact Download
+        uses: actions/download-atifact@v1
+        with:
+          name: public-folder
+      #S3 Sync-action
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1 # Change this to your desired AWS region
+          SOURCE_DIR: 'public'
 
       - name: Deploy to S3
         run: |
